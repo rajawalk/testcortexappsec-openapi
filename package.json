@@ -1,0 +1,13 @@
+{
+  "name": "cortexvultestrepo1",
+  "version": "1.0.0",
+  "description": "OpenAPI security policy testing repository",
+  "main": "index.js",
+  "scripts": {
+    "lint": "spectral lint docs/api-spec.yaml",
+    "lint:strict": "spectral lint docs/api-spec.yaml --fail-severity=warn"
+  },
+  "devDependencies": {
+    "@stoplight/spectral-cli": "^6.11.0"
+  }
+}

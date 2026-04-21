@@ -1,0 +1,49 @@
+openapi: 3.0.3
+info:
+  title: Cortex AppSec Test API
+  description: This API is designed to test security linter policies.
+  version: 1.0.0
+
+# --- TRIGGER 1: Undefined Global Security Rule ---
+# This references 'OAuth2AccessCode', which is NOT defined in components.
+security:
+  - OAuth2AccessCode: [read, write]
+
+paths:
+  /users:
+    get:
+      summary: Retrieve users
+      description: Returns a list of users from the system.
+      # --- TRIGGER 2: Undefined Operation Security Rule ---
+      # This references 'BasicAuth', which is also missing from components.
+      security:
+        - BasicAuth: []
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+
+components:
+  schemas:
+    User:
+      type: object
+      # --- PREVIOUS MISCONFIGURATION ---
+      view:workspace_titles: true 
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+
+  # --- THE VULNERABILITY ---
+  # We have defined 'securitySchemes' but it only contains 'ApiKeyAuth'.
+  # Because the 'security' arrays above reference 'OAuth2AccessCode' 
+  # and 'BasicAuth', this will trigger the Cortex policy.
+  securitySchemes:
+    ApiKeyAuth:
+      type: apiKey
+      in: header
+      name: X-API-KEY

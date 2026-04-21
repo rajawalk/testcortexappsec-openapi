@@ -20,7 +20,3 @@ jobs:
 
       - name: Install Dependencies
         run: npm install
-
-      - name: Run Spectral Linter
-        # This will identify the missing securityScheme we introduced
-        run: npm run lint

@@ -7,7 +7,7 @@ info:
 # --- TRIGGER 1: Undefined Global Security Rule ---
 # This references 'OAuth2AccessCode', which is NOT defined in components.
 security:
-  - OAuth2AccessCode: [read, write]
+  - OAuth2AccesCode: [read, write]
 
 paths:
   /users:

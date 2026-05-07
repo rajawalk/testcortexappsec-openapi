@@ -1,7 +1,7 @@
 openapi: 3.0.3
 info:
   title: Cortex AppSec Test API
-  description: This API is designed to test security linter policies.
+  description: This API is designed to test security linter poicies.
   version: 1.0.0
 
 # --- TRIGGER 1: Undefined Global Security Rule ---
